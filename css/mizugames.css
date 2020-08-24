@@ -1,0 +1,208 @@
+@font-face {
+    font-family: 'Market Deco';
+    src: url('../font/market_deco.woff2') format('woff2'),
+         url('../font/market_deco.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+
+    --bg-color-gradient-primary: rgb(247, 230, 250);
+    --bg-color-gradient-secondary: rgb(107, 115, 131);
+
+    --main-color: rgb(202, 2, 71);
+    --dark-color: rgb(44, 28, 46);
+    --light-color: rgb(241, 59, 84);
+    --shadow-color: rgb(41, 0, 14);
+    --light-shadow-color: rgb(183, 1, 64);
+
+    --menu-height: 40px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Market Deco', sans-serif;
+    color: var(--main-color);
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 28px;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--bg-color-gradient-primary);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--bg-color-gradient-primary)), to(var(--bg-color-gradient-secondary)));
+    background-image: -webkit-linear-gradient(var(--bg-color-gradient-primary), var(--bg-color-gradient-secondary));
+    background-image: -o-linear-gradient(var(--bg-color-gradient-primary), var(--bg-color-gradient-secondary));
+    background-image: linear-gradient(var(--bg-color-gradient-primary), var(--bg-color-gradient-secondary));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.menu, .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100vw;
+    height: var(--menu-height);
+    color: var(--main-color);
+    text-shadow: 1px 1px 3px var(--shadow-color);
+    background-color: var(--dark-color);
+}
+
+.menu {
+    margin-top: 0px;
+    font-size: 1em;
+}
+.footer {
+    margin-top: calc(-1 * var(--menu-height));
+    font-size: .75em;
+}
+
+.link {
+    min-width: 2.5vw;
+    padding: 0 0px 0 10px;
+}
+.link:after {
+    content: '-';
+    margin-left: 10px;
+}
+.link:last-child:after {
+    content: '';
+}
+
+.link:hover {
+    color: var(--light-color);
+    text-shadow: 1px 1px 3px var(--light-shadow-color);
+}
+
+.banner-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    min-height: 100%;
+}
+
+
+.banner, .shadow {
+    position: absolute;
+    opacity: 1;
+    transition: all .5s ease-in-out;
+}
+.banner {
+    transform: translatey(0px);
+    animation: enter-banner 1s cubic-bezier(.05,.61,.11,1.00), float-banner 5s ease-in-out 1s infinite;
+    
+}
+.shadow {
+    filter: blur(0px);
+    transform: scale(1);
+    transform-origin : 50% 70%;
+    animation: enter-shadow 1s cubic-bezier(.05,.61,.11,1.00), float-shadow 5s ease-in-out 1s infinite;
+}
+
+.message-container {
+    position: absolute;
+    filter: blur(10);
+    opacity: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); 
+    backdrop-filter: blur(10px);
+    pointer-events:none;
+}
+
+
+.message {
+    position: absolute;
+    font-size: 10vw;
+    color: var(--dark-color);
+    margin-top: -0.7vh;
+    text-shadow: 1px 1px 3px rgb(56, 0, 20);
+}
+
+.transition {
+    transition: filter 0.75s ease-in-out, opacity 0.75s ease-in-out;
+}
+
+.splash-show {
+    opacity: 1;
+}
+
+@media screen and (min-width: 600px) {
+    .message {
+       font-size: 60px;
+    }
+  }
+
+@keyframes enter-banner {
+    0% {
+        transform: translatey(-200px);
+        opacity: 0;
+    }
+	100% {
+        transform: translatey(0px);
+        opacity: 1;
+	}
+}
+
+@keyframes float-banner {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+
+@keyframes enter-shadow {
+	0% {
+        filter: blur(5px);
+        transform: scale(0.5);
+        opacity: 0;
+    }
+	100% {
+        filter: blur(0px);
+        transform: scale(1);
+        opacity: 1;
+	}
+}
+
+@keyframes float-shadow {
+	0% {
+        filter: blur(0px);
+        transform: scale(1);
+	}
+	50% {
+        filter: blur(5px);
+        transform: scale(0.95);
+	}
+	100% {
+        filter: blur(0px);
+        transform: scale(1);
+	}
+}
